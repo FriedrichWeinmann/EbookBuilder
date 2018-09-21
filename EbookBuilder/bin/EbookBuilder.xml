@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EbookBuilder</name>
+    </assembly>
+    <members>
+        <member name="T:EbookBuilder.Book">
+            <summary>
+            The entire book, combining 
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.Name">
+            <summary>
+            The name of the book
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.Author">
+            <summary>
+            Name of the author
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.Publisher">
+            <summary>
+            Name of the publisher
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.Pages">
+            <summary>
+            The pages that make up the book
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.CssFile">
+            <summary>
+            The CSS File to use to style the book
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.TimeCreated">
+            <summary>
+            The timestamp of when the book was assembled
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Book.Metadata">
+            <summary>
+            Additional metadata of the book
+            </summary>
+        </member>
+        <member name="T:EbookBuilder.Image">
+            <summary>
+            An image used in the ebook
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Image.ImageID">
+            <summary>
+            The ID of the image (used to link it to the page)
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Image.Extension">
+            <summary>
+            The extension of the image
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Image.FileName">
+            <summary>
+            Extension of the file to write the image to.
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Image.Type">
+            <summary>
+            The type of item this is (Hint: It's an Image!)
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Image.Data">
+            <summary>
+            The actual image data
+            </summary>
+        </member>
+        <member name="T:EbookBuilder.Item">
+            <summary>
+            Base class for all items that can go into an ebook
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Item.Name">
+            <summary>
+            Name of the item
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Item.Type">
+            <summary>
+            The type of item it is
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Item.TimeCreated">
+            <summary>
+            The timestamp the item was recorded from source
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Item.MetaData">
+            <summary>
+            Additional metadata a source can freely add
+            </summary>
+        </member>
+        <member name="T:EbookBuilder.ItemType">
+            <summary>
+            What kind of item it is
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.ItemType.Page">
+            <summary>
+            A page filled with textto be displayed
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.ItemType.Image">
+            <summary>
+            An image resource used in a page
+            </summary>
+        </member>
+        <member name="T:EbookBuilder.Page">
+            <summary>
+            An individual page, part of the ebook
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Page.Index">
+            <summary>
+            The index of the file. Used for building output in the correct order.
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Page.Type">
+            <summary>
+            The type of item this is (Hint: It's a page!)
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Page.Content">
+            <summary>
+            The html content of the file. All datasources must provide a string value.
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Page.SourceName">
+            <summary>
+            The name that generated the source
+            </summary>
+        </member>
+    </members>
+</doc>

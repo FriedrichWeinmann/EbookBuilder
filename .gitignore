@@ -1,0 +1,22 @@
+﻿
+# ignore the settings folder and files for VSCode and PSS
+.vscode/*
+*.psproj
+*TempPoint*
+
+# Ignore staging info from Visual Studio
+library/EbookBuilder/.vs/*
+library/EbookBuilder/EbookBuilder/bin/*
+library/EbookBuilder/EbookBuilder/obj/*
+
+# ignore PowerShell Studio MetaData
+EbookBuilder/EbookBuilder.psproj
+EbookBuilder/EbookBuilder.psproj.bak
+EbookBuilder/EbookBuilder.psprojs
+EbookBuilder/EbookBuilder.psproj
+
+# ignore the TestResults
+TestResults/*
+
+# ignore the publishing Directory
+publish/*

@@ -1,0 +1,262 @@
+﻿h1 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 3em;
+}
+
+h1.rightbound {
+	text-align: right;
+}
+
+h1.series {
+	font-weight: normal;
+	font-size: 1.2em;
+}
+
+h2 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2em;
+	page-break-before: always;
+	page-break-after: avoid;
+	margin-bottom: 2em;
+}
+
+h3 {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.6em;
+}
+
+h4 {
+	margin: 0.3em;
+	padding: 0px;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+div.quote {
+	text-align: right;
+	font-style: italic;
+	margin-bottom: 0.75em;
+}
+
+div.quoted {
+	text-align: right;
+    margin-bottom: 1em;
+}
+
+div.data {
+	text-align: left;
+	margin-top: 0.5em;
+    margin-bottom: 0.5em;
+	margin-left: 2em;
+}
+
+div.letter {
+	text-align: left;
+	margin-top: 0.5em;
+    margin-bottom: 0.5em;
+	margin-left: 2em;
+	font-style: italic;
+}
+
+sup {
+	font-size: 0.75em;
+    line-height: normal;
+    vertical-align: super
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+	text-indent: 1em;
+	text-align: justify;
+}
+
+p.text {
+	text-indent: 1em;
+	text-align: justify;
+}
+
+p.divide {
+	text-indent: 0em;
+	text-align: center;
+    padding: 1em;
+	margin-top: 0.3em;
+}
+
+p.picture {
+	text-indent: 0em;
+	text-align: center;
+}
+
+p.characters {
+	text-indent: 0em;
+	margin-bottom: 0.5em;
+}
+
+p.pageend {
+	page-break-after: always;
+}
+
+p.editorial {
+	text-indent: 0em;
+	text-align: center;
+	font-size: 0.8em;
+}
+
+p.editorialleft {
+	text-indent: 0em;
+	text-align: left;
+	font-size: 0.8em;
+}
+
+p.editorialright {
+	text-indent: 0em;
+	text-align: right;
+	font-size: 0.8em;
+}
+
+p.booklist {
+	text-align: center;
+	font-style: italic;
+	text-indent: 0em;
+	margin-bottom: 1em;
+	orphans: 3;
+}
+
+p.booklistseries {
+	text-align: center;
+	text-indent: 0em;
+	font-weight: bold;
+	page-break-after: avoid;
+}
+
+p.location {
+	text-align: center;
+	font-weight: bold;
+	text-indent: 0em;
+	margin-bottom: 1em;
+}
+
+p.dedication {
+	text-align: center;
+	text-indent: 0em;
+	margin-bottom: 0.5em;
+}
+
+p.dedication_signed {
+	text-align: right;
+	text-indent: 1em;
+	font-style: italic;
+}
+
+p.firstpar {
+	text-indent: 0em;
+}
+
+p.formula {
+	text-indent: 0em;
+	text-align: center;
+	padding: 0.5em;
+	margin-top: 0.15em;
+}
+
+p.signature {
+	text-align: right;
+	text-indent: 0em;
+	margin-top: 1em;
+}
+
+p.poem {
+	text-align: center;
+	text-indent: 0em;
+	font-style: italic;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+
+dt.lexentry {
+	font-style: italic;
+	font-weight: bolder;
+	text-indent: 0em;
+	text-align: left;
+}
+
+dd.lexexplanation {
+	text-indent: 0em;
+	text-align: left;
+}
+
+table.list {
+	width: 100%;
+}
+
+tr {
+
+}
+
+td.left {
+	text-indent: 0em;
+	text-align: left;
+	padding-left: 0.4em;
+	vertical-align: top;
+}
+
+td.right {
+	text-indent: 0em;
+	text-align: right;
+	padding-right: 0.4em;
+	vertical-align: top;
+}
+
+/* Conversation Type 1 */
+span.con1 {
+	font-style: italic;
+}
+
+/* Conversation Type 2 */
+span.con2 {
+	font-weight: bold;
+}
+
+/* Conversation Type 3 */
+span.con3 {
+	font-style: italic;
+	font-weight: bold;
+}
+
+/* Conversation Type 4 */
+span.con4 {
+	font-variant: small-caps;
+}
+
+/* Conversation Type 5 */
+span.con5 {
+	font-variant: small-caps;
+	font-style: italic;
+}
+
+/* Conversation Type 6 */
+span.con6 {
+	font-variant: small-caps;
+	font-weight: bold;
+}
+
+/* Conversation Type 7 */
+span.con7 {
+	font-variant: small-caps;
+	font-style: italic;
+	font-weight: bold;
+}
+
+/* Conversation Type 8 */
+span.con8 {
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+span.nonitalic {
+	font-style: normal;
+}

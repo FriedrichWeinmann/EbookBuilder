@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{557F9CF6-460E-4291-B4D4-3EE99FC353B6}") = "EbookBuilder", "EbookBuilder\EbookBuilder.csproj", "{7676733E-C6B9-4E50-A0ED-2A3AA091D3FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7676733E-C6B9-4E50-A0ED-2A3AA091D3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7676733E-C6B9-4E50-A0ED-2A3AA091D3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7676733E-C6B9-4E50-A0ED-2A3AA091D3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7676733E-C6B9-4E50-A0ED-2A3AA091D3FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB107929-A8EA-4061-97F9-AF483185CDDB}
+	EndGlobalSection
+EndGlobal

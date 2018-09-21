@@ -1,0 +1,11 @@
+﻿TOPIC
+	about_EbookBuilder
+	
+SHORT DESCRIPTION
+	Explains how to use the EbookBuilder powershell module
+	
+LONG DESCRIPTION
+	<Insert Content here>
+
+KEYWORDS
+	EbookBuilder
