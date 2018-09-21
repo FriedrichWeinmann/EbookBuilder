@@ -1,5 +1,37 @@
 ﻿function Export-EBBook
 {
+<#
+	.SYNOPSIS
+		Exports pages and images into a epub ebook.
+	
+	.DESCRIPTION
+		Exports pages and images into a epub ebook.
+	
+	.PARAMETER Path
+		The path to export to.
+		Will ignore the name if an explicit filename was specified.
+		
+	.PARAMETER Name
+		The name of the ebook. Will also be used for the filename if a path to a folder was specified.
+	
+	.PARAMETER Author
+		The author to set for the ebook.
+	
+	.PARAMETER Publisher
+		The publisher of the ebook.
+	
+	.PARAMETER CssData
+		Custom CSS to use to style the ebook.
+		Allows you to tune how the ebook is styled.
+	
+	.PARAMETER Page
+		The pages to compile into an ebook.
+	
+	.EXAMPLE
+		PS C:\> Read-EBMicrosoftDocsIndexPage -Url https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/best-practices-for-securing-active-directory | Export-EBBook -Path . -Name ads-best-practices.epub -Author "Friedrich Weinmann" -Publisher "Infernal Press"
+	
+		Compiles an ebook out of the Active Directory Best Practices.
+#>
 	[CmdletBinding()]
 	param (
 		[PsfValidateScript({ Resolve-PSFPath -Path $args[0] -Provider FileSystem -SingleItem -NewChild }, ErrorMessage = "Folder to place the file in must exist!")]

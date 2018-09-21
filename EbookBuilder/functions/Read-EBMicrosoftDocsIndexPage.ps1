@@ -1,5 +1,25 @@
 ﻿function Read-EBMicrosoftDocsIndexPage
 {
+<#
+	.SYNOPSIS
+		Converts an index page of a Microsoft Docs into a book.
+	
+	.DESCRIPTION
+		Converts an index page of a Microsoft Docs into a book.
+		Resolves all links in the index.
+	
+	.PARAMETER Url
+		The Url to the index page.
+	
+	.PARAMETER StartIndex
+		Start Index the pages will begin with.
+		Index is what Export-EBBook will use to determine page order.
+	
+	.EXAMPLE
+		PS C:\> Read-EBMicrosoftDocsIndexPage -Url https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/best-practices-for-securing-active-directory
+	
+		Parses the Active Directory Security Best Practices into page and image objects.
+#>
 	[CmdletBinding()]
 	Param (
 		[string]

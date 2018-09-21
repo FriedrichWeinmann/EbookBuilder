@@ -1,5 +1,23 @@
 ﻿function Read-EBMicrosoftDocsPage
 {
+<#
+	.SYNOPSIS
+		Parses a web document from the Microsoft documents.
+	
+	.DESCRIPTION
+		Parses a web document from the Microsoft documents.
+	
+	.PARAMETER Url
+		The url of the website to parse.
+	
+	.PARAMETER StartIndex
+		The index of the page. Used for sorting the pages when building the ebook.
+	
+	.EXAMPLE
+		PS C:\> Read-EBMicrosoftDocsPage -Url https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/best-practices-for-securing-active-directory
+	
+		Parses the file of the specified link and converts it into a page.
+#>
 	[CmdletBinding()]
 	param (
 		[Parameter(Mandatory = $true, ValueFromPipeline = $true)]
@@ -48,8 +66,6 @@
 				TimeCreated = Get-Date
 				MetaData = @{ GithubPath = $source }
 			}
-			
-			
 		}
 	}
 }
