@@ -177,6 +177,14 @@ p.poem {
 	margin-bottom: 0.75em;
 }
 
+p.systemmessage {
+	text-indent: 0em;
+	text-align: center;
+	font-size: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
 dt.lexentry {
 	font-style: italic;
 	font-weight: bolder;
@@ -191,6 +199,21 @@ dd.lexexplanation {
 
 table.list {
 	width: 100%;
+}
+
+table.systemmessage {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	width: 100%;
+	border: 1px solid black;
+	background-color: #707070;
+}
+
+table.systemdata {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	border: 1px solid black;
+	background-color: #A0A0A0;
 }
 
 tr {

@@ -173,7 +173,7 @@
 {3}
 {4}
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
-    <item id="style.css" href "Styles/Style.css" media-type="application/css"/>
+    <item id="style.css" href="Styles/Style.css" media-type="text/css"/>
   </manifest>
   <spine toc="ncx">
 {5}

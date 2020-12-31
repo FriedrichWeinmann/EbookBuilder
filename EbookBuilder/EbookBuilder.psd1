@@ -26,7 +26,7 @@
 	# Modules that must be imported into the global environment prior to importing
 	# this module
 	RequiredModules = @(
-		@{ ModuleName='PSFramework'; ModuleVersion='0.10.27.128' }
+		@{ ModuleName='PSFramework'; ModuleVersion='1.4.150' }
 	)
 	
 	# Assemblies that must be loaded prior to importing this module
@@ -40,19 +40,21 @@
 	
 	# Functions to export from this module
 	FunctionsToExport  = @(
-		'Export-EBBook',
-		'Read-EBMicrosoftDocsIndexPage',
+		'Export-EBBook'
+		'Read-EBMarkdown'
+		'Read-EBMicrosoftDocsIndexPage'
 		'Read-EBMicrosoftDocsPage'
+		'Register-EBMarkdownBlock'
 	)
 	
 	# Cmdlets to export from this module
-	CmdletsToExport = ''
+	# CmdletsToExport = ''
 	
 	# Variables to export from this module
-	VariablesToExport = ''
+	# VariablesToExport = ''
 	
 	# Aliases to export from this module
-	AliasesToExport = ''
+	# AliasesToExport = ''
 	
 	# List of all modules packaged with this module
 	ModuleList = @()
