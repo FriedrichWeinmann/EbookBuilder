@@ -40,7 +40,8 @@
 				{
 					if ($line -like '## <*')
 					{
-						$firstPar = ConvertFrom-MdBlock -Type $blockData.Type -Lines $blockData.Lines -Attributes $blockData.Attributes -StringBuilder $stringBuilder
+						try { $firstPar = ConvertFrom-MdBlock -Type $blockData.Type -Lines $blockData.Lines -Attributes $blockData.Attributes -StringBuilder $stringBuilder }
+						catch { Stop-PSFFunction -Message 'Failed to convert block' -ErrorRecord $_ -Target $blockData -EnableException $true -Cmdlet $PSCmdlet }
 						$inBlock = $false
 					}
 					else { $blockData.Lines += $line }

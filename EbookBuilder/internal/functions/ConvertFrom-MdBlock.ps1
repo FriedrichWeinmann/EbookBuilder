@@ -35,6 +35,8 @@
 		$Type,
 		
 		[parameter(Mandatory = $true)]
+		[AllowEmptyCollection()]
+		[AllowEmptyString()]
 		[string[]]
 		$Lines,
 		

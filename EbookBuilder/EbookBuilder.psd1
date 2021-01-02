@@ -3,7 +3,7 @@
 	ModuleToProcess = 'EbookBuilder.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0.0'
+	ModuleVersion = '2.0.0'
 	
 	# ID used to uniquely identify this module
 	GUID = '6dd367f3-da8b-48ae-8198-ce2b709cb1a4'
