@@ -6,4 +6,4 @@ internal\tepp\*.tepp.ps1
 internal\tepp\assignment.ps1
 internal\scripts\license.ps1
 internal\scripts\initialize.ps1
-internal\vlocks\*.ps1
+internal\blocks\*.ps1
