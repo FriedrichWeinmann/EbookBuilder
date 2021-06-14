@@ -6,7 +6,7 @@
 	$null = $sb.AppendLine('<table class="systemmessage">')
 	$null = $sb.AppendLine('<tr>')
 	
-	$string = $Data.Lines -join "<br/>" | Convert-MarkdownLine
+	$string = $Data.Lines -join "<br/>" | ConvertFrom-MarkdownLine
 	$null = $sb.AppendLine(('<td><p class="systemmessage">{0}</p></td>' -f $string))
 	
 	$null = $sb.AppendLine('</tr>')

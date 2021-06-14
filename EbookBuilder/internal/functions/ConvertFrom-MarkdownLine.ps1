@@ -1,4 +1,4 @@
-﻿function Convert-MarkdownLine
+﻿function ConvertFrom-MarkdownLine
 {
 <#
 	.SYNOPSIS
