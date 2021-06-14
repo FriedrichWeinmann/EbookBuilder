@@ -15,3 +15,12 @@ foreach ($file in (Get-ChildItem "$ModuleRoot\internal\tepp\*.tepp.ps1" -ErrorAc
 
 # Load License
 . Import-ModuleFile -Path "$ModuleRoot\internal\scripts\license.ps1"
+
+# Initialize Stuff
+. Import-ModuleFile -Path "$ModuleRoot\internal\scripts\initialize.ps1"
+
+# Load block conversions
+foreach ($file in (Get-ChildItem "$ModuleRoot\internal\blocks\*.ps1" -ErrorAction Ignore))
+{
+	. Import-ModuleFile -Path $file.FullName
+}
