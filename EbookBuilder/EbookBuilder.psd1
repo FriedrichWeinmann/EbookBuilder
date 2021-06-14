@@ -3,7 +3,7 @@
 	ModuleToProcess = 'EbookBuilder.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '2.0.0'
+	ModuleVersion = '2.1.1'
 	
 	# ID used to uniquely identify this module
 	GUID = '6dd367f3-da8b-48ae-8198-ce2b709cb1a4'
@@ -15,13 +15,13 @@
 	CompanyName = ' '
 	
 	# Copyright statement for this module
-	Copyright = 'Copyright (c) 2018 Friedrich Weinmann'
+	Copyright = 'Copyright (c) Friedrich Weinmann'
 	
 	# Description of the functionality provided by this module
 	Description = 'Build ebooks from data sources'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
-	PowerShellVersion = '5.0'
+	PowerShellVersion = '5.1'
 	
 	# Modules that must be imported into the global environment prior to importing
 	# this module
@@ -48,15 +48,6 @@
 		'Register-EBMarkdownBlock'
 	)
 	
-	# Cmdlets to export from this module
-	# CmdletsToExport = ''
-	
-	# Variables to export from this module
-	# VariablesToExport = ''
-	
-	# Aliases to export from this module
-	# AliasesToExport = ''
-	
 	# List of all modules packaged with this module
 	ModuleList = @()
 	
@@ -70,13 +61,13 @@
 		PSData = @{
 			
 			# Tags applied to this module. These help with module discovery in online galleries.
-			# Tags = @()
+			Tags = @('book')
 			
 			# A URL to the license for this module.
-			# LicenseUri = ''
+			LicenseUri = 'https://github.com/FriedrichWeinmann/EbookBuilder/blob/development/LICENSE'
 			
 			# A URL to the main website for this project.
-			# ProjectUri = ''
+			ProjectUri = 'https://github.com/FriedrichWeinmann/EbookBuilder'
 			
 			# A URL to an icon representing this module.
 			# IconUri = ''
