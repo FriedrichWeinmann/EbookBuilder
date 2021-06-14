@@ -1,5 +1,20 @@
 ﻿function Read-EBMarkdown
 {
+	<#
+	.SYNOPSIS
+		Reads a markdown file and converts it to a page to be built into an ebook
+	
+	.DESCRIPTION
+		Reads a markdown file and converts it to a page to be built into an ebook
+	
+	.PARAMETER Path
+		Path to the file to read.
+	
+	.EXAMPLE
+		PS C:\> Get-ChildItem *.md | Read-EBMarkdown
+
+		Reads and converts all markdown files in he current folder
+	#>
 	[CmdletBinding()]
 	param (
 		[parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -112,6 +127,7 @@
 		
 		function New-Block
 		{
+			[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
 			[CmdletBinding()]
 			param (
 				[string]

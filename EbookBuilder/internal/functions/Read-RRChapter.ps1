@@ -31,6 +31,7 @@
 	begin {
 		#region functions
 		function Get-NextLink {
+			[OutputType([string])]
 			[CmdletBinding()]
 			param (
 				[parameter(ValueFromPipeline = $true)]
@@ -44,6 +45,7 @@
 		}
 		
 		function ConvertTo-Markdown {
+			[OutputType([string])]
 			[CmdletBinding()]
 			param (
 				[Parameter(ValueFromPipeline = $true)]
