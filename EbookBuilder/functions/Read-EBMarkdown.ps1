@@ -1,5 +1,4 @@
-﻿function Read-EBMarkdown
-{
+﻿function Read-EBMarkdown {
 	<#
 	.SYNOPSIS
 		Reads a markdown file and converts it to a page to be built into an ebook
@@ -23,10 +22,8 @@
 		$Path
 	)
 	
-	begin
-	{
-		function ConvertFrom-Markdown
-		{
+	begin {
+		function ConvertFrom-Markdown {
 			[CmdletBinding()]
 			param (
 				[string]
@@ -37,24 +34,22 @@
 			)
 			
 			$lines = Get-Content -Path $Path -Encoding UTF8
-			$stringBuilder = [System.Text.StringBuilder]::new()
+			$stringBuilder = New-SBStringBuilder -Name ebook
 			
 			$inBlock = $false
 			$blockData = [pscustomobject]@{
 				Attributes = @{ }
-				Type = $null
-				Lines = @()
+				Type	   = $null
+				Lines	   = @()
+				File	   = $Path
 			}
 			$paragraph = @()
 			$firstPar = $true
 			
-			foreach ($line in $lines)
-			{
+			foreach ($line in $lines) {
 				#region Process Block Content
-				if ($inBlock)
-				{
-					if ($line -like '## <*')
-					{
+				if ($inBlock) {
+					if ($line -like '## <*') {
 						try { $firstPar = ConvertFrom-MdBlock -Type $blockData.Type -Lines $blockData.Lines -Attributes $blockData.Attributes -StringBuilder $stringBuilder }
 						catch { Stop-PSFFunction -Message 'Failed to convert block' -ErrorRecord $_ -Target $blockData -EnableException $true -Cmdlet $PSCmdlet }
 						$inBlock = $false
@@ -66,33 +61,29 @@
 				#endregion Process Block Content
 				
 				# Handle Chapter Title
-				if ($line -like '# *')
-				{
-					$null = $stringBuilder.AppendLine("<h2>$line</h2>")
+				if ($line -like '# *') {
+					$null = $stringBuilder.AppendLine("<h2>$($line -replace '^# ')</h2>")
 					continue
 				}
 				
 				# Handle begin of a Block
-				if ($line -like '## <*')
-				{
+				if ($line -like '## <*') {
 					$inBlock = $true
-					$blockData = New-Block -Line $line
+					$blockData = New-Block -Line $line -Path $Path
 					continue
 				}
 				
 				#region Process paragraph
-				if ($line.Trim() -eq "")
-				{
+				if ($line.Trim() -eq "") {
 					if (-not $paragraph) { continue }
 					
 					$class = 'text'
-					if ($firstPar)
-					{
+					if ($firstPar) {
 						$class = 'firstpar'
 						$firstPar = $false
 					}
 					
-					$null = $stringBuilder.AppendLine("<p class=`"$class`">$(($paragraph -join " ") -replace '\*\*(.+?)\*\*','<b>$1</b>' -replace '_(.+?)_','<i>$1</i>')</p>")
+					$null = $stringBuilder.AppendLine("<p class=`"$class`">$(($paragraph -join " ") -replace '\*\*(.+?)\*\*', '<b>$1</b>' -replace '_(.+?)_', '<i>$1</i>')</p>")
 					$paragraph = @()
 					continue
 				}
@@ -102,11 +93,9 @@
 			}
 			
 			#region Ensure final paragraph is taken care of
-			if ($paragraph)
-			{
+			if ($paragraph) {
 				$class = 'text'
-				if ($firstPar)
-				{
+				if ($firstPar) {
 					$class = 'firstpar'
 					$firstPar = $false
 				}
@@ -118,27 +107,28 @@
 			New-Object EbookBuilder.Page -Property @{
 				Index = $Index
 				Name  = (Get-Item -Path $Path).BaseName
-				Content = $stringBuilder.ToString()
+				Content = Close-SBStringBuilder -Name ebook
 				SourceName = $Path
 				TimeCreated = Get-Date
 				MetaData = @{ }
 			}
 		}
 		
-		function New-Block
-		{
+		function New-Block {
 			[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
 			[CmdletBinding()]
 			param (
 				[string]
-				$Line
+				$Line,
+				
+				[string]
+				$Path
 			)
 			
 			$type = $Line -replace '## <(\w+).+$', '$1'
 			$attributes = @{ }
 			$entries = $Line | Select-String '(\w+)="(.+?)"' -AllMatches
-			foreach ($match in $entries.Matches)
-			{
+			foreach ($match in $entries.Matches) {
 				$attributes[$match.Groups[1].Value] = $match.Groups[2].Value
 			}
 			
@@ -146,15 +136,15 @@
 				Attributes = $attributes
 				Type	   = $type
 				Lines	   = @()
+				File	   = $Path
 			}
 		}
 		
 		$Index = 1
 	}
-	process
-	{
-		foreach ($pathItem in $Path)
-		{
+	process {
+		foreach ($pathItem in $Path) {
+			Write-PSFMessage -Message "Processing: $pathItem"
 			ConvertFrom-Markdown -Path $pathItem -Index $Index
 			$Index++
 		}

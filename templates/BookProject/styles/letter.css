@@ -1,0 +1,40 @@
+﻿/* Letter */
+
+div.letter {
+	margin-top: 0.5em;
+    margin-bottom: 0.5em;
+	margin-left: 1em;
+    font-style: italic;
+}
+
+p.letterAppellation {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    font-style: italic;
+    text-align: left;
+}
+
+p.letterBodyFirst {
+    font-style: italic;
+    text-indent: 0em;
+    text-align: justify;
+}
+
+p.letterBodyOther {
+    font-style: italic;
+    text-indent: 1em;
+    text-align: justify;
+}
+
+p.letterSigned {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    font-style: italic;
+    text-align: left;
+}
+
+span.letterBodyEmphasis {
+    font-style: normal;
+}

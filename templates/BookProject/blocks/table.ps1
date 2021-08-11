@@ -8,7 +8,7 @@
 	if ($Data.Attributes.title)
 	{
 		$null = $sb.AppendLine('<tr>')
-		$null = $sb.AppendLine("<th>$($Data.Attributes.title | ConvertFrom-MarkdownLine)</th>")
+		$null = $sb.AppendLine("<th>$($Data.Attributes.title | ConvertFrom-EBMarkdownLine)</th>")
 		$null = $sb.AppendLine('</tr>')
 	}
 	#endregion Create header
@@ -23,7 +23,7 @@
 			'markdown'
 			{
 				$entries = $line.Trim('|') -split '\|'
-				foreach ($entry in $entries) { $null = $sb.AppendLine("<td>$($entry.Trim() | ConvertFrom-MarkdownLine)</td>") }
+				foreach ($entry in $entries) { $null = $sb.AppendLine("<td>$($entry.Trim() | ConvertFrom-EBMarkdownLine)</td>") }
 			}
 			#endregion Default markdown table
 			
@@ -31,8 +31,8 @@
 			default
 			{
 				$entries = $line -split ":", 2
-				$null = $sb.AppendLine("<td>$($entries[0].Trim() | ConvertFrom-MarkdownLine)</td>")
-				$null = $sb.AppendLine("<td>$($entries[1].Trim() | ConvertFrom-MarkdownLine)</td>")
+				$null = $sb.AppendLine("<td>$($entries[0].Trim() | ConvertFrom-EBMarkdownLine)</td>")
+				$null = $sb.AppendLine("<td>$($entries[1].Trim() | ConvertFrom-EBMarkdownLine)</td>")
 			}
 			#endregion Default Table Style
 		}

@@ -1,6 +1,7 @@
 ﻿# Ebook Builder
 
 A module that is designed to build Ebooks from Html or MarkDown input.
+Also a full EBook authoring toolkit.
 
 ## Installation
 
@@ -22,5 +23,5 @@ Read-EBMicrosoftDocsIndexPage -Url $url | Export-EBBook -Path . -Name ads-best-p
 > Build from Markdown
 
 ```powershell
-Get-ChildItem -Path *.md | Read-EBMarkdown | Export-EBBook -Path C:\Ouput -Name MyBook -Author 'Friedich Weinmann' -Publisher 'Infernal Press'
+Get-ChildItem -Path *.md | Read-EBMarkdown | Export-EBBook -Path C:\Ouput -Name MyBook -Author 'Friedrich Weinmann' -Publisher 'Infernal Press'
 ```
