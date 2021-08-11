@@ -57,6 +57,7 @@
 	
 		Converts all the lines of text in $Data.Lines, assigning the specified classes as applicable.
 #>
+	[OutputType([string])]
 	[CmdletBinding()]
 	param (
 		[Parameter(ValueFromPipeline = $true, Mandatory = $true)]
@@ -83,6 +84,7 @@
 	begin {
 		#region Utility Functions
 		function Get-ClassString {
+			[OutputType([string])]
 			[CmdletBinding()]
 			param (
 				[string]

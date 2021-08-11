@@ -38,6 +38,7 @@
 		
 		Downloads the specified series, creates a folder in the current path and writes each chapter as its own .md file into that folder.
 #>
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingInvokeExpression", "")]
 	[CmdletBinding(DefaultParameterSetName = 'Explicit')]
 	param (
 		[Parameter(Mandatory = $true, ParameterSetName = 'Explicit')]
