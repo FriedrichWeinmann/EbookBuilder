@@ -21,7 +21,7 @@ $global:MayContainCommand = @{
 	"Write-Verbose" = @()
 	"Write-Warning" = @()
 	"Write-Error"  = @()
-	"Write-Output" = @()
+	"Write-Output" = @('Read-EBRoyalRoad.ps1')
 	"Write-Information" = @()
 	"Write-Debug" = @()
 }

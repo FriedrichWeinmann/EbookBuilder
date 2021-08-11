@@ -3,7 +3,7 @@
 	ModuleToProcess = 'EbookBuilder.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '2.1.1'
+	ModuleVersion = '2.2.10'
 	
 	# ID used to uniquely identify this module
 	GUID = '6dd367f3-da8b-48ae-8198-ce2b709cb1a4'
@@ -26,7 +26,10 @@
 	# Modules that must be imported into the global environment prior to importing
 	# this module
 	RequiredModules = @(
-		@{ ModuleName='PSFramework'; ModuleVersion='1.6.201' }
+		@{ ModuleName = 'PSFramework'; ModuleVersion = '1.6.205' }
+		@{ ModuleName = 'string'; ModuleVersion = '1.0.0' }
+		@{ ModuleName = 'StringBuilder'; ModuleVersion = '1.0.0' }
+		@{ ModuleName = 'PSModuleDevelopment'; ModuleVersion = '2.2.10.120' }
 	)
 	
 	# Assemblies that must be loaded prior to importing this module
@@ -40,8 +43,14 @@
 	
 	# Functions to export from this module
 	FunctionsToExport  = @(
+		'ConvertFrom-EBMarkdown'
+		'ConvertFrom-EBMarkdownLine'
 		'Export-EBBook'
+		'Export-EBMdBook'
+		'New-EBBookProject'
 		'Read-EBMarkdown'
+		'Read-EBMdBlockData'
+		'Read-EBMdDataSection'
 		'Read-EBMicrosoftDocsIndexPage'
 		'Read-EBMicrosoftDocsPage'
 		'Read-EBRoyalRoad'

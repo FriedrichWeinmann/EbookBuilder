@@ -29,6 +29,7 @@
 			'</{0,1}strong>' = '**'
 			'</{0,1}b>'	     = '**'
 			'<br>'		     = '<br />'
+			'<span style="font-weight: 400">(.+?)</span>' = '$1'
 		}
 	}
 	process {

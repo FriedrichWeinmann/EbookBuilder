@@ -139,5 +139,48 @@
             The name that generated the source
             </summary>
         </member>
+        <member name="T:EbookBuilder.Picture">
+            <summary>
+            A picture to be included in an ebook.
+            Uses humanized labels, rather than cryptic but guaranteed unique IDs.
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Picture.DisplayName">
+            <summary>
+            The name of the file
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Picture.ImageID">
+            <summary>
+            The ID of the image (used to link it to the page)
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Picture.Extension">
+            <summary>
+            The extension of the image
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Picture.FileName">
+            <summary>
+            Extension of the file to write the image to.
+            </summary>
+        </member>
+        <member name="P:EbookBuilder.Picture.Type">
+            <summary>
+            The type of item this is (Hint: It's an Image!)
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.Picture.Data">
+            <summary>
+            The actual image data
+            </summary>
+        </member>
+        <member name="M:EbookBuilder.Picture.GetPicture(System.IO.FileInfo)">
+            <summary>
+            Create a new picture object from its fileinfo object.
+            </summary>
+            <param name="Info">The object describing the file to load</param>
+            <returns>A completed picture object for use in ebook creation.</returns>
+        </member>
     </members>
 </doc>
