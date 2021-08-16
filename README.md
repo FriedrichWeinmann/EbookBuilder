@@ -13,6 +13,17 @@ Install-Module EbookBuilder
 
 ## Use
 
+> Create new book Project
+
+This will create a new book project:
+
+```powershell
+New-EBBookProject -Name InfernalAdventures -Author 'Fred' -Publisher 'Fred'
+```
+
+It can be used to build author ebooks or publish to [Royal Road](https://www.royalroad.com/).
+For an optimal authoring experience, it is recommended to use Visual Studio Code and install the recommended extensions.
+
 > Convert Microsoft Docs Page
 
 ```powershell

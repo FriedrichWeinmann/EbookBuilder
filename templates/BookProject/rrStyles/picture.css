@@ -1,0 +1,25 @@
+﻿/* Picture */
+div.picture {
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+img.pictureCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.pictureLeft {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+img.pictureRight {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}

@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## 2.3.15 (2021-08-16)
+
++ New: Command Export-EBRoyalRoadPage - export chapters as html document for pasting into Royal Road
++ New: Command Read-EBCssStyleSheet - read/parse css stylesheets and generate resulting class-style mappings
++ New: Command ConvertTo-EBHtmlInlineStyle - converts html  text, replacing classes with their associated styles
++ Upd: Config schema - added RRStyle setting to point at custom folder for CSS styles used when exproting to Rooyal Road
++ Upd: Config schema - added RRExportPath setting to point at output folder for exporting to Royal Road Html format
+
 ## 2.2.10 (2021-08-11)
 
 + New: Integration into PSModuleDevelopment templates

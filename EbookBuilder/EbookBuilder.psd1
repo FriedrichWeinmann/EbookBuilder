@@ -3,7 +3,7 @@
 	ModuleToProcess = 'EbookBuilder.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '2.2.10'
+	ModuleVersion = '2.3.15'
 	
 	# ID used to uniquely identify this module
 	GUID = '6dd367f3-da8b-48ae-8198-ce2b709cb1a4'
@@ -45,9 +45,11 @@
 	FunctionsToExport  = @(
 		'ConvertFrom-EBMarkdown'
 		'ConvertFrom-EBMarkdownLine'
+		'ConvertTo-EBHtmlInlineStyle'
 		'Export-EBBook'
 		'Export-EBMdBook'
 		'New-EBBookProject'
+		'Read-EBCssStyleSheet'
 		'Read-EBMarkdown'
 		'Read-EBMdBlockData'
 		'Read-EBMdDataSection'

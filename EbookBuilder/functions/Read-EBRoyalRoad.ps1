@@ -124,7 +124,8 @@
 			$nextLink = $page.NextLink
 			
 			if ($index -notin $chaptersToSkip) {
-				$page.TextMD | Set-Content -Path ("{0}\{1}-{2:D4}-{3:D4}.md" -f $currentBookPath, $Name, $bookCount, $index) -Encoding UTF8
+				[System.IO.File]::WriteAllText(("{0}\{1}-{2:D4}-{3:D4}.md" -f $currentBookPath, $Name, $bookCount, $index), $page.TextMD)
+				#$page.TextMD | Set-Content -Path ("{0}\{1}-{2:D4}-{3:D4}.md" -f $currentBookPath, $Name, $bookCount, $index) -Encoding UTF8
 			}
 			
 			$index++

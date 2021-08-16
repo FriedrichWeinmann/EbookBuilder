@@ -2,28 +2,34 @@
     # Shared settings
     
     # Relative path to where to store the Markdown version of the book
-    OutPath      = '\books'
+    OutPath         = '\books'
 
 
     # Settings for Markdown --> Epub
-    Name         = 'þnameþ'
-    Author       = 'þauthorþ'
-    Publisher    = 'þpublisherþ'
-    Tags         = @()
-    Blocks       = "\blocks"
-    HasTitle     = $true # Whether each chapter includes its own title header
-    Style        = '\styles'
-    ExportPath   = '\epub'
+    Name            = 'þnameþ'
+    Author          = 'þauthorþ'
+    Publisher       = 'þpublisherþ'
+    Tags            = @()
+    Blocks          = "\blocks"
+    Style           = '\styles'
+    ExportPath      = '\epub'
+
+    # Settings for Markdown --> Royal Road Html
+    RRExportPath    = '\rrExport'
+    RRStyle         = '\rrStyles'
     
 
     # Settings for Royal Road --> Markdown
     
     # Insert link to starting chapter.
-    Url          = ''
+    Url             = ''
     # Chapter Number of the first chapter
-    StartIndex   = 1
+    StartIndex      = 1
     # Book number of the first book. Use if not starting with the first book
-    BookIndex    = 1
+    BookIndex       = 1
+    # Whether each chapter includes its own title header
+    HasTitle        = $true
+    
     # Explicit list of books. Map chapter index to name of book.
     # Example:
     <#
@@ -34,9 +40,9 @@
             120 = 'War'
         }
     #>
-    Books        = @{ }
+    Books           = @{ }
     # Relative path to the folder containing replacements used to process the web source.
-    Replacements = "\replacements"
+    Replacements    = "\replacements"
 
     # Chapters which will not be synced from RR due to manual edits in markdown
     ChapterOverride = @( )

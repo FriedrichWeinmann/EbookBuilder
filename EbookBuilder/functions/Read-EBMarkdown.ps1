@@ -14,6 +14,7 @@
 
 		Reads and converts all markdown files in he current folder
 	#>
+	[OutputType([EbookBuilder.Page])]
 	[CmdletBinding()]
 	param (
 		[parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
@@ -24,6 +25,7 @@
 	
 	begin {
 		function ConvertFrom-Markdown {
+			[OutputType([EbookBuilder.Page])]
 			[CmdletBinding()]
 			param (
 				[string]

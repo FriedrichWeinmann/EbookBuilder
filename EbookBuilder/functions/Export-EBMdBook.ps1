@@ -30,6 +30,9 @@
 	$bookRoot = Join-Path -Path $baseFolder -ChildPath $config.OutPath
 	$blockRoot = Join-Path -Path $baseFolder -ChildPath $config.Blocks
 	$exportPath = Join-Path -Path $baseFolder -ChildPath $config.ExportPath
+	$rrExportPath = ''
+	if ($config.RRExportPath) { $rrExportPath = Join-Path -Path $baseFolder -ChildPath $config.RRExportPath }
+	
 	$author = "Unknown"
 	if ($config.Author) { $author = $config.Author }
 	$publisher = "Unknown"
@@ -39,10 +42,34 @@
 	if ($config.Style) {
 		$cssPath = Join-Path -Path $baseFolder -ChildPath $config.Style
 	}
+	$rrCssPath = $null
+	if ($config.RRStyle) {
+		$rrCssPath = Join-Path -Path $baseFolder -ChildPath $config.RRStyle
+	}
 	foreach ($file in Get-ChildItem -Path $blockRoot -File -Filter *.ps1) {
 		& {
 			. $file.FullName
 		}
+	}
+	
+	if ($rrExportPath) {
+		$rrExportParam = @{
+			Path = $rrExportPath
+			Name = $config.Name
+		}
+		if ($cssPath -and -not $rrCssPath) {
+			$rrExportParam.CssData = Get-ChildItem -Path $cssPath -Filter *.css | ForEach-Object {
+				Get-Content -Path $_.FullName
+			} | Join-String -Separator "`n"
+		}
+		if ($rrCssPath) {
+			$rrExportParam.CssData = Get-ChildItem -Path $rrCssPath -Filter *.css | ForEach-Object {
+				Get-Content -Path $_.FullName
+			} | Join-String -Separator "`n"
+		}
+		
+		$rrExportPipe = { Export-EBRoyalRoadPage @rrExportParam }.GetSteppablePipeline()
+		$rrExportPipe.Begin($true)
 	}
 	
 	foreach ($folder in Get-ChildItem -Path $bookRoot -Directory) {
@@ -69,6 +96,7 @@
 		$exportPipe.Begin($true)
 		Get-ChildItem -Path $folder.FullName -File -Filter *.md | Read-EBMarkdown | ForEach-Object {
 			$exportPipe.Process($_)
+			if ($rrExportPath) { $rrExportPipe.Process($_) }
 		}
 		$picturePath = Join-Path -Path $folder.FullName -ChildPath pictures
 		if (Test-Path -Path $picturePath) {
@@ -78,5 +106,6 @@
 			}
 		}
 		$exportPipe.End()
+		if ($rrExportPath) { $rrExportPipe.End() }
 	}
 }

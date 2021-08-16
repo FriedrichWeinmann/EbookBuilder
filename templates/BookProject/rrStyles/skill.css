@@ -1,0 +1,157 @@
+﻿/* Skill */
+div.skill {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+div.skillSection {
+	margin-bottom: 0.5em;
+}
+
+p.skillHeader {
+	text-align: center;
+	margin-top: 0.5em;
+    margin-bottom: 0.5em;
+	font-style: normal;
+	text-indent: 0em;
+	font-weight: bold;
+}
+
+p.skillFooter {
+	text-align: right;
+    margin-bottom: 0.5em;
+	font-style: italic;
+	text-indent: 0em;
+}
+
+p.skillSectionHeader {
+    text-align: left;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+span.skillEmphasis {
+    font-style: italic;
+}
+span.skillEmphasisReverse {
+    font-style: bold;
+}
+
+/* Content Options */
+
+p.skillFirstJustify {
+    text-align: justify;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstLeft {
+    text-align: left;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstCenter {
+    text-align: center;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstRight {
+    text-align: right;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstLeftNormal {
+    text-align: left;
+    font-style: normal;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstCenterNormal {
+    text-align: center;
+    font-style: normal;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstRightNormal {
+    text-align: right;
+    font-style: normal;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillFirstJustifyNormal {
+    text-align: justify;
+    font-style: normal;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+p.skillOtherJustify {
+    text-align: justify;
+    font-style: italic;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherLeft {
+    text-align: left;
+    font-style: italic;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherCenter {
+    text-align: center;
+    font-style: italic;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherRight {
+    text-align: right;
+    font-style: italic;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherLeftNormal {
+    text-align: left;
+    font-style: normal;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherCenterNormal {
+    text-align: center;
+    font-style: normal;
+    text-indent: 0em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherRightNormal {
+    text-align: right;
+    font-style: normal;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+p.skillOtherJustifyNormal {
+    text-align: justify;
+    font-style: normal;
+    text-indent: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}

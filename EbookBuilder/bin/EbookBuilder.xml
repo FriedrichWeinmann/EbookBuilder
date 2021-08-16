@@ -182,5 +182,44 @@
             <param name="Info">The object describing the file to load</param>
             <returns>A completed picture object for use in ebook creation.</returns>
         </member>
+        <member name="T:EbookBuilder.StyleObject">
+            <summary>
+            Represents all CSS style settings associated with a given tag or class
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.StyleObject.Tag">
+            <summary>
+            Tag this style affects
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.StyleObject.Class">
+            <summary>
+            Class this style affects
+            </summary>
+        </member>
+        <member name="F:EbookBuilder.StyleObject.Attributes">
+            <summary>
+            Attributes that are part of this style object
+            </summary>
+        </member>
+        <member name="M:EbookBuilder.StyleObject.ToString">
+            <summary>
+            Creates the default style string display
+            </summary>
+            <returns>The default string representation of this style</returns>
+        </member>
+        <member name="M:EbookBuilder.StyleObject.ToInline(System.Boolean)">
+            <summary>
+            Present the style as an inline attribute to be placed inside the opening html tag.
+            </summary>
+            <param name="Header">Whether to include the header part of the style attribute (adds the 'style="' and '"' parts around the compacted attributes.</param>
+            <returns>The inline attribute for use within the html tag</returns>
+        </member>
+        <member name="M:EbookBuilder.StyleObject.ToStyleSheet">
+            <summary>
+            Present the style as it would be used within a CSS stylesheet
+            </summary>
+            <returns>The style as it would be used within a CSS stylesheet</returns>
+        </member>
     </members>
 </doc>

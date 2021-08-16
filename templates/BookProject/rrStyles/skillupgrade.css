@@ -1,0 +1,9 @@
+﻿/* Skill Upgrades */
+
+p.skillUpgrade {
+	text-align: left;
+	margin-top: 0.5em;
+    margin-bottom: 0.5em;
+	font-style: italic;
+	text-indent: 0em;
+}

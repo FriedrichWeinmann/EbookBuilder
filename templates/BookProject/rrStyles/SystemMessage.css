@@ -42,6 +42,7 @@ p.systemmessageBlockOther {
 	padding: 0px;
 	text-indent: 1em;
 	text-align: justify;
+    color: #010000;
 }
 
 p.systemmessageBlockFirst {
@@ -49,26 +50,9 @@ p.systemmessageBlockFirst {
 	padding: 0px;
 	text-indent: 0em;
 	text-align: justify;
+    color: #010000;
 }
 
 span.systemmessageBlockEmphasis {
     font-style: italic;
 }
-
-/* Other
-p.systemmessage {
-	text-indent: 0em;
-	text-align: center;
-	font-size: 1em;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-table.systemmessage {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-	width: 100%;
-	border: 1px solid black;
-	background-color: #707070;
-}
-*/
