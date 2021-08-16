@@ -48,6 +48,7 @@
 		'ConvertTo-EBHtmlInlineStyle'
 		'Export-EBBook'
 		'Export-EBMdBook'
+		'Export-EBRoyalRoadPage'
 		'New-EBBookProject'
 		'Read-EBCssStyleSheet'
 		'Read-EBMarkdown'
