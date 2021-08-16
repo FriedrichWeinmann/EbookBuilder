@@ -53,7 +53,7 @@
 #>
 	[CmdletBinding()]
 	param (
-		[PsfValidateScript({ Resolve-PSFPath -Path $args[0] -Provider FileSystem -SingleItem -NewChild }, ErrorMessage = "Folder to place the file in must exist!")]
+		[PsfValidateScript('PSFramework.Validate.FSPath.FileOrParent', ErrorString = 'PSFramework.Validate.FSPath.FileOrParent')]
 		[string]
 		$Path = ".",
 		

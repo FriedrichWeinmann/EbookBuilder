@@ -1,0 +1,22 @@
+﻿/* Bullet */
+
+table.bulletFrameNormal {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	border: 1px solid black;
+	background-color: #A0A0A0;
+}
+
+table.bulletFrameMaxWidth {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	border: 1px solid black;
+	background-color: #A0A0A0;
+    width: 100%;
+}
+
+p.bulletHeader {
+    margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	font-weight: bold;
+}
