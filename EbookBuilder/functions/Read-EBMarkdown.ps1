@@ -8,6 +8,16 @@
 	
 	.PARAMETER Path
 		Path to the file to read.
+		
+	.PARAMETER InlineStyles
+		Hashtable mapping inline decorators to span classes.
+		Used to enable inline style customizations.
+		For example, when providing a hashtable like this:
+		@{ 1 = 'spellcast' }
+		It will convert this line:
+		"Let me show you my #1#Fireball#1#!"
+		into
+		"Let me show you my <span class="spellcast">Fireball</span>!"
 	
 	.EXAMPLE
 		PS C:\> Get-ChildItem *.md | Read-EBMarkdown
@@ -20,7 +30,10 @@
 		[parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
 		[Alias('FullName')]
 		[string[]]
-		$Path
+		$Path,
+		
+		[hashtable]
+		$InlineStyles = @{ }
 	)
 	
 	begin {
@@ -32,10 +45,13 @@
 				$Path,
 				
 				[int]
-				$Index
+				$Index,
+				
+				[hashtable]
+				$InlineStyles = @{ }
 			)
 			
-			$lines = Get-Content -Path $Path -Encoding UTF8
+			$lines = Get-Content -Path $Path -Encoding UTF8 | ConvertFrom-InlineStyle -InlineStyles $InlineStyles
 			$stringBuilder = New-SBStringBuilder -Name ebook
 			
 			$inBlock = $false
@@ -116,6 +132,35 @@
 			}
 		}
 		
+		function ConvertFrom-InlineStyle {
+			[OutputType([string])]
+			[CmdletBinding()]
+			param (
+				[Parameter(ValueFromPipeline = $true)]
+				[string[]]
+				$Line,
+				
+				[hashtable]
+				$InlineStyles = @{ }
+			)
+			
+			begin {
+				$replaceHash = @{ }
+				
+				foreach ($pair in $InlineStyles.GetEnumerator()) {
+					$replaceHash["#$($pair.Key)#(.+?)#$($pair.Key)#"] = '<span class="{0}">$1</span>' -f $pair.Value
+				}
+			}
+			process {
+				foreach ($string in $Line) {
+					foreach ($pair in $replaceHash.GetEnumerator()) {
+						$string = $string -replace $pair.Key, $pair.Value
+					}
+					$string
+				}
+			}
+		}
+		
 		function New-Block {
 			[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
 			[CmdletBinding()]
@@ -147,7 +192,7 @@
 	process {
 		foreach ($pathItem in $Path) {
 			Write-PSFMessage -Message "Processing: $pathItem"
-			ConvertFrom-Markdown -Path $pathItem -Index $Index
+			ConvertFrom-Markdown -Path $pathItem -Index $Index -InlineStyles $InlineStyles
 			$Index++
 		}
 	}

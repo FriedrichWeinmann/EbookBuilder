@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## ???
+
++ New: Authoring - Added ability to add inline styles
++ Upd: Book Project configuration - changed the default setting for importing from RoyalRoad to expect no chapter title within the text body
++ Fix: Error exporting to RoyalRoad html format when split into multiple books
+
 ## 2.3.15 (2021-08-16)
 
 + New: Command Export-EBRoyalRoadPage - export chapters as html document for pasting into Royal Road

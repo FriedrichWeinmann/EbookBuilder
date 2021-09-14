@@ -46,6 +46,11 @@
 	if ($config.RRStyle) {
 		$rrCssPath = Join-Path -Path $baseFolder -ChildPath $config.RRStyle
 	}
+	$inlineHash = @{ }
+	if ($config.InlineConfig) {
+		$inlineHash = Import-PSFPowerShellDataFile -Path (Join-Path -Path $baseFolder -ChildPath $config.InlineConfig)
+	}
+	
 	foreach ($file in Get-ChildItem -Path $blockRoot -File -Filter *.ps1) {
 		& {
 			. $file.FullName
@@ -94,7 +99,7 @@
 		
 		$exportPipe = { Export-EBBook @exportParam }.GetSteppablePipeline()
 		$exportPipe.Begin($true)
-		Get-ChildItem -Path $folder.FullName -File -Filter *.md | Read-EBMarkdown | ForEach-Object {
+		Get-ChildItem -Path $folder.FullName -File -Filter *.md | Read-EBMarkdown -InlineStyles $inlineHash | ForEach-Object {
 			$exportPipe.Process($_)
 			if ($rrExportPath) { $rrExportPipe.Process($_) }
 		}
@@ -106,6 +111,6 @@
 			}
 		}
 		$exportPipe.End()
-		if ($rrExportPath) { $rrExportPipe.End() }
 	}
+	if ($rrExportPath) { $rrExportPipe.End() }
 }
