@@ -3,7 +3,8 @@
     
     # Relative path to where to store the Markdown version of the book
     OutPath         = '\books'
-
+    # Path to the file mapping inline style tags to span classes
+    InlineConfig    = '\inlineConfig.psd1'
 
     # Settings for Markdown --> Epub
     Name            = 'þnameþ'
@@ -28,7 +29,7 @@
     # Book number of the first book. Use if not starting with the first book
     BookIndex       = 1
     # Whether each chapter includes its own title header
-    HasTitle        = $true
+    HasTitle        = $false
     
     # Explicit list of books. Map chapter index to name of book.
     # Example:
