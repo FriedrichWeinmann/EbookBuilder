@@ -61,6 +61,7 @@
 	[CmdletBinding()]
 	param (
 		[Parameter(ValueFromPipeline = $true, Mandatory = $true)]
+		[AllowEmptyCollection()]
 		[AllowEmptyString()]
 		[string[]]
 		$Line,

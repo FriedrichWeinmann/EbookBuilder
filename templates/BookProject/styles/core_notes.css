@@ -1,0 +1,19 @@
+﻿div.notes {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	font-style: italic;
+}
+
+p.noteFirstPar {
+	text-indent: 0em;
+	text-align: justify;
+}
+
+p.noteText {
+	text-indent: 1em;
+	text-align: justify;
+}
+
+span.noteEmphasis {
+	font-style: normal;
+}

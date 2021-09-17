@@ -53,8 +53,14 @@
 			
 			$lines = Get-Content -Path $Path -Encoding UTF8 | ConvertFrom-InlineStyle -InlineStyles $InlineStyles
 			$stringBuilder = New-SBStringBuilder -Name ebook
+			$PSDefaultParameterValues['Add-SBLine:Name'] = 'ebook'
 			
 			$inBlock = $false
+			$inCode = $false
+			$inBullet = $false
+			$inNote = $false
+			$inParagraph = $false
+			
 			$blockData = [pscustomobject]@{
 				Attributes = @{ }
 				Type	   = $null
@@ -78,22 +84,68 @@
 				}
 				#endregion Process Block Content
 				
-				# Handle Chapter Title
-				if ($line -like '# *') {
-					$null = $stringBuilder.AppendLine("<h2>$($line -replace '^# ')</h2>")
+				#region Process Code Content
+				if ($inCode) {
+					if ($line -like '``````*') {
+						$paragraph = @()
+						Add-SBLine '</pre>'
+						$inCode = $false
+						$firstPar = $true
+						continue
+					}
+					Add-SBLine $line
 					continue
 				}
+				#endregion Process Code Content
 				
-				# Handle begin of a Block
-				if ($line -like '## <*') {
-					$inBlock = $true
-					$blockData = New-Block -Line $line -Path $Path
+				#region Process Bullet Point
+				if ($inBullet) {
+					if (-not $line.Trim()) {
+						Add-SBLine '<li class="defaultLI">{0}</li>' -Values ($paragraph -join ' ')
+						Add-SBLine '</ul>'
+						$paragraph = @()
+						$inBullet = $false
+						$firstPar = $true
+						continue
+					}
+					if ($line -notlike '+ *') {
+						$paragraph += $line
+						continue
+					}
+					
+					if ($paragraph) {
+						Add-SBLine '<li class="defaultLI">{0}</li>' -Values ($paragraph -join ' ')
+						$paragraph = @()
+					}
+					$paragraph += $line -replace '^\+ '
 					continue
 				}
+				#endregion Process Bullet Point
 				
-				#region Process paragraph
-				if ($line.Trim() -eq "") {
-					if (-not $paragraph) { continue }
+				#region Process Notes
+				if ($inNote) {
+					if ($line.Trim()) {
+						$paragraph += $line -replace '^>\s{0,1}'
+						continue
+					}
+					
+					foreach ($text in ConvertFrom-EBMarkdown -Line $paragraph -ClassFirstParagraph noteFirstPar -ClassParagraph noteText -EmphasisClass noteEmphasis) {
+						Add-SBLine $text
+					}
+					Add-SBLine '<hr/></div>'
+					$inNote = $false
+					$firstPar = $true
+					$paragraph = @()
+					continue
+				}
+				#endregion Process Notes
+				
+				#region Process Paragraph
+				if ($inParagraph) {
+					if ($line.Trim()) {
+						$paragraph += $line
+						continue
+					}
 					
 					$class = 'text'
 					if ($firstPar) {
@@ -101,26 +153,117 @@
 						$firstPar = $false
 					}
 					
-					$null = $stringBuilder.AppendLine("<p class=`"$class`">$(($paragraph -join " ") -replace '\*\*(.+?)\*\*', '<b>$1</b>' -replace '_(.+?)_', '<i>$1</i>')</p>")
+					foreach ($text in ConvertFrom-EBMarkdown -Line $paragraph -ClassFirstParagraph $class -ClassParagraph $class) {
+						Add-SBLine $text
+					}
 					$paragraph = @()
+					$inParagraph = $false
+					continue
+				}
+				#endregion Process Paragraph
+				
+				#region Region Starters
+				# Handle begin of a Block
+				if ($line -like '## <*') {
+					$inBlock = $true
+					$blockData = New-Block -Line $line -Path $Path
 					continue
 				}
 				
-				$paragraph += $line
-				#endregion Process paragraph
+				# Handle begin of a Code section
+				if ($line -like '``````*') {
+					$inCode = $true
+					$firstPar = $true
+					Add-SBLine '<pre>'
+					continue
+				}
+				
+				# Handle begin of a Bullet-Points section
+				if ($line -like '+ *') {
+					$inBullet = $true
+					Add-SBLine '<ul>'
+					$paragraph += $line -replace '^\+ '
+					continue
+				}
+				
+				# Handle begin of a Notes section
+				if ($line -like '> *') {
+					$inNote = $true
+					Add-SBLine '<div class="notes"><hr/>'
+					$paragraph += $line -replace '^> '
+					continue
+				}
+				
+				# Handle Chapter Title
+				if ($line -like '# *') {
+					$null = $stringBuilder.AppendLine("<h2>$($line -replace '^# ')</h2>")
+					continue
+				}
+				
+				# Handle begin of a Paragraph section
+				if ($line.Trim()) {
+					$inParagraph = $true
+					$paragraph += $line
+				}
+				#endregion Region Starters
 			}
 			
-			#region Ensure final paragraph is taken care of
-			if ($paragraph) {
+			#region Cleanup
+			
+			#region Process Block Content
+			if ($inBlock) {
+				try { $firstPar = ConvertFrom-MdBlock -Type $blockData.Type -Lines $blockData.Lines -Attributes $blockData.Attributes -StringBuilder $stringBuilder }
+				catch { Stop-PSFFunction -Message 'Failed to convert block' -ErrorRecord $_ -Target $blockData -EnableException $true -Cmdlet $PSCmdlet }
+				$inBlock = $false
+			}
+			#endregion Process Block Content
+			
+			#region Process Code Content
+			if ($inCode) {
+				Add-SBLine '</pre>'
+				$inCode = $false
+				$firstPar = $true
+			}
+			#endregion Process Code Content
+			
+			#region Process Bullet Point
+			if ($inBullet) {
+				Add-SBLine '<li class="defaultLI">{0}</li>' -Values ($paragraph -join ' ')
+				Add-SBLine '</ul>'
+				$paragraph = @()
+				$inBullet = $false
+				$firstPar = $true
+			}
+			#endregion Process Bullet Point
+			
+			#region Process Notes
+			if ($inNote) {
+				foreach ($text in ConvertFrom-EBMarkdown -Line $paragraph -ClassFirstParagraph noteFirstPar -ClassParagraph noteText -EmphasisClass noteEmphasis) {
+					Add-SBLine $text
+				}
+				Add-SBLine '<hr/></div>'
+				$inNote = $false
+				$firstPar = $true
+				$paragraph = @()
+			}
+			#endregion Process Notes
+			
+			#region Process Paragraph
+			if ($inParagraph) {
 				$class = 'text'
 				if ($firstPar) {
 					$class = 'firstpar'
 					$firstPar = $false
 				}
 				
-				$null = $stringBuilder.AppendLine("<p class=`"$class`">$(($paragraph -join " ") -replace '\*\*(.+?)\*\*', '<b>$1</b>' -replace '_(.+?)_', '<i>$1</i>')</p>")
+				foreach ($text in ConvertFrom-EBMarkdown -Line $paragraph -ClassFirstParagraph $class -ClassParagraph $class) {
+					Add-SBLine $text
+				}
+				$paragraph = @()
+				$inParagraph = $false
 			}
-			#endregion Ensure final paragraph is taken care of
+			#endregion Process Paragraph
+			#endregion Cleanup
 			
 			New-Object EbookBuilder.Page -Property @{
 				Index = $Index

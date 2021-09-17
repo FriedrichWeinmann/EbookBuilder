@@ -1,8 +1,9 @@
 ﻿# Changelog
 
-## ???
+## 2.3.19 (2021-09-17)
 
 + New: Authoring - Added ability to add inline styles
++ New: Authoring - Added support for markdown-native bullet points, code blocks and notes
 + Upd: Book Project configuration - changed the default setting for importing from RoyalRoad to expect no chapter title within the text body
 + Fix: Error exporting to RoyalRoad html format when split into multiple books
 
