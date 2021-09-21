@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 2.3.20 (2021-09-21)
+
++ Fix: Read-EBCssStyleSheet - throws error on empty class
+
 ## 2.3.19 (2021-09-17)
 
 + New: Authoring - Added ability to add inline styles
