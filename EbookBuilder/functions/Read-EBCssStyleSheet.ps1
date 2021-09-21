@@ -94,6 +94,7 @@
 					if (-not $ResultHash[$currentTag][$currentClass]) { $ResultHash[$currentTag][$currentClass] = @{ } }
 					
 					$key, $value = $line -split ":", 2
+					if (-not $key -or -not $value) { continue }
 					Write-PSFMessage -Level InternalComment -Message '  {0} : {1}' -StringValues $key, $value
 					$ResultHash[$currentTag][$currentClass][$key.Trim()] = $value.Trim(" ;")
 					#endregion Content
