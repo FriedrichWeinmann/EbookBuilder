@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## ???
+
++ Fix: Stylesheet to inline style conversion now follows a deterministic order, avoiding unexpected updates to unchanged chapters in HTML export.
+
 ## 2.3.20 (2021-09-21)
 
 + Fix: Read-EBCssStyleSheet - throws error on empty class
