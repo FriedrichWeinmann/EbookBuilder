@@ -33,7 +33,7 @@
 		}
 	}
 	process {
-		foreach ($string in $Line) {
+		foreach ($string in $Line -replace ' </i>', '</i> ' -replace ' </em>', '</em> ') {
 			foreach ($pair in $mapping.GetEnumerator()) {
 				$string = $string -replace $pair.Key, $pair.Value
 			}
