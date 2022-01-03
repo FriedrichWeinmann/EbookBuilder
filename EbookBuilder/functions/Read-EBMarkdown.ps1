@@ -291,7 +291,17 @@
 				$replaceHash = @{ }
 				
 				foreach ($pair in $InlineStyles.GetEnumerator()) {
-					$replaceHash["#$($pair.Key)#(.+?)#$($pair.Key)#"] = '<span class="{0}">$1</span>' -f $pair.Value
+					if ($pair.Value -is [string]) {
+						$replaceHash["#$($pair.Key)#(.+?)#$($pair.Key)#"] = '<span class="{0}">$1</span>' -f $pair.Value
+					}
+					else {
+						$newValue = '<span class="{0}">' -f $pair.Value.Class
+						if ($pair.Value.Prepend) { $newValue += $pair.Value.Prepend }
+						$newValue += '$1'
+						if ($pair.Value.Append) { $newValue += $pair.Value.Append }
+						$newValue += '</span>'
+						$replaceHash["#$($pair.Key)#(.+?)#$($pair.Key)#"] = $newValue
+					}
 				}
 			}
 			process {

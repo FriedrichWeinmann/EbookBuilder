@@ -52,7 +52,7 @@ namespace EbookBuilder
             if (Header)
                 sb.Append("style=\"");
 
-            foreach (var entry in Attributes)
+            foreach (var entry in Attributes.OrderBy(o => o.Key))
             {
                 if (first)
                 {

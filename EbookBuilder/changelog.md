@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 2.4.24 (2022-01-03)
+
++ New: Command: Read-EBEpub - extracts chapters from an epub ebook and converts them to markdown
++ New: Block: Hidden - adds a way to include notes in chapters that simply don't show in the output.
++ Upd: Converter HTML->MD - improved parsing of italics and bold styles to improve Markdown formatting compliance
++ Fix: Stylesheet to inline style conversion now follows a deterministic order, avoiding unexpected updates to unchanged chapters in HTML export.
+
 ## 2.3.20 (2021-09-21)
 
 + Fix: Read-EBCssStyleSheet - throws error on empty class
