@@ -38,7 +38,7 @@
 	process
 	{
 		foreach ($string in $Line) {
-			$string -replace '\*\*(.+?)\*\*', '<b>$1</b>' -replace '_(.+?)_', $emphasis
+			$string -replace '\*\*(.+?)\*\*', '<b>$1</b>' -replace '_(.+?)_', $emphasis -replace '\\\*', '*'
 		}
 	}
 }

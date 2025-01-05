@@ -1,6 +1,5 @@
-﻿function Export-EBBook
-{
-<#
+﻿function Export-EBBook {
+	<#
 	.SYNOPSIS
 		Exports pages and images into a epub ebook.
 	
@@ -89,11 +88,9 @@
 		$Description
 	)
 	
-	begin
-	{
+	begin {
 		#region Functions
-		function Write-File
-		{
+		function Write-File {
 			[CmdletBinding()]
 			param (
 				[System.IO.DirectoryInfo]
@@ -112,28 +109,26 @@
 			[System.IO.File]::WriteAllText($tempPath, $Text, $utf8NoBom)
 		}
 		
-		function ConvertTo-ManifestPageData
-		{
+		function ConvertTo-ManifestPageData {
 			[CmdletBinding()]
 			param (
 				$Pages
 			)
 			
 			$lines = $Pages | ForEach-Object {
-					'    <item id="{0}" href="Text/{0}" media-type="application/xhtml+xml"/>' -f $_.EbookFileName
+				'    <item id="{0}" href="Text/{0}" media-type="application/xhtml+xml"/>' -f $_.EbookFileName
 			}
 			$lines -join "`n"
 		}
 		
-		function ConvertTo-ManifestImageData
-		{
+		function ConvertTo-ManifestImageData {
 			[CmdletBinding()]
 			param (
 				$Images
 			)
 			
 			$lines = $images | ForEach-Object {
-				'    <item id="{0}" href="Images/{1}" media-type="image/{2}"/>' -f ($_.ImageID -replace "\s","_"), $_.FileName, "Jpeg"
+				'    <item id="{0}" href="Images/{1}" media-type="image/{2}"/>' -f ($_.ImageID -replace "\s", "_"), $_.FileName, "Jpeg"
 			}
 			$lines -join "`n"
 		}
@@ -142,43 +137,37 @@
 		#region Prepare Resources
 		if (-not $FileName) { $FileName = $Name }
 		$resolvedPath = Resolve-PSFPath -Path $Path -Provider FileSystem -SingleItem -NewChild
-		if (Test-Path $resolvedPath)
-		{
+		if (Test-Path $resolvedPath) {
 			if ((Get-Item $resolvedPath).PSIsContainer) { $resolvedPath = Join-Path $resolvedPath $FileName }
 		}
 		if ($resolvedPath -notlike "*.epub") { $resolvedPath += ".epub" }
 		$zipPath = $resolvedPath -replace 'epub$', 'zip'
 		$cssContent = $CssData
-		if (-not $cssContent)
-		{
+		if (-not $cssContent) {
 			$cssContent = [System.IO.File]::ReadAllText((Resolve-Path "$($script:ModuleRoot)\data\Common.css"), [System.Text.Encoding]::UTF8)
 		}
 		$pages = @()
 		$images = @()
 		#endregion Prepare Resources
 	}
-	process
-	{
+	process {
 		#region Process Input items
-		foreach ($item in $Page)
-		{
-			switch ($item.Type)
-			{
+		foreach ($item in $Page) {
+			switch ($item.Type) {
 				"Page" { $pages += $item }
 				"Image" { $images += $item }
 			}
 		}
 		#endregion Process Input items
 	}
-	end
-	{
+	end {
 		$id = 1
 		$pages = $pages | Sort-Object Index | Select-PSFObject -KeepInputObject -Property @{
-			Name = "EbookFileName"
+			Name       = "EbookFileName"
 			# Expression = { "{0}.xhtml" -f (New-Guid) }
 			Expression = { "Chapter {0:D3}.xhtml" -f $_.Index }
 		}, @{
-			Name = "TocIndex"
+			Name       = "TocIndex"
 			Expression = { $id++ }
 		}
 		
@@ -196,6 +185,36 @@
 '@
 		$oebpsPath = New-Item -Path $tempPath.FullName -Name "OEBPS" -ItemType Directory
 		
+		#region Cover
+		$hasCover = $false
+		if ($coverImage = $images | Where-Object { "cover$($_.Extension)" -eq $_.Name }) {
+			$coverImage.DisplayName = 'cover'
+			$hasCover = $true
+			$titlePageText = @"
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="calibre:cover" content="true"/>
+        <title>Cover</title>
+        <style type="text/css" title="override_css">
+            @page {padding: 0pt; margin:0pt}
+            body { text-align: center; padding:0pt; margin: 0pt; }
+        </style>
+    </head>
+    <body>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%" viewBox="0 0 1374 2200" preserveAspectRatio="none">
+                <image xlink:href="images/$($coverImage.FileName)"/>
+            </svg>
+        </div>
+    </body>
+</html>
+"@
+			Write-File -Root $oebpsPath -Path titlepage.xhtml -Text $titlePageText
+		}
+		#endregion Cover
+
 		#region content.opf
 		$contentOpfText = @"
 <?xml version="1.0" encoding="utf-8"?>
@@ -217,19 +236,24 @@
 		foreach ($tag in $Tags) {
 			$contentOpfText += "`n    <dc:subject>$tag</dc:subject>"
 		}
+		if ($hasCover) {
+			$contentOpfText += "`n    <meta name=`"cover`" content=`"cover`"/>"
+		}
 		$contentOpfText += @"
 
   </metadata>
   <manifest>
 $(ConvertTo-ManifestPageData -Pages $pages)
-$(ConvertTo-ManifestImageData -Images $images)
+$(ConvertTo-ManifestImageData -Images $images)$(if ($hasCover) { "`n<item id=`"titlepage`" href=`"titlepage.xhtml`" media-type=`"application/xhtml+xml`"/>"})
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
     <item id="style.css" href="Styles/Style.css" media-type="text/css"/>
   </manifest>
   <spine toc="ncx">
 $($pages | Format-String -Format '    <itemref idref="{0}"/>' -Property EbookFileName | Join-String "`n")
   </spine>
-  <guide/>
+  <guide>
+	$(if ($hasCover) { '<reference type="cover" href="titlepage.xhtml" title="Cover"/>' })
+  </guide>
 </package>
 "@
 		Write-File -Root $oebpsPath -Path 'content.opf' -Text $contentOpfText
@@ -238,7 +262,7 @@ $($pages | Format-String -Format '    <itemref idref="{0}"/>' -Property EbookFil
 		#region TOC.ncx
 		$bookMarkText = ($pages | ForEach-Object {
 				$tocIndex = $_.Index
-				if ($_.TocIndex) { $tocIndex = $_.TocIndex}
+				if ($_.TocIndex) { $tocIndex = $_.TocIndex }
 				@'
     <navPoint id="navPoint-{0}" playOrder="{0}">
       <navLabel>
@@ -247,7 +271,7 @@ $($pages | Format-String -Format '    <itemref idref="{0}"/>' -Property EbookFil
       <content src="Text/{1}"/>
     </navPoint>
 '@ -f $tocIndex, $_.EbookFileName
-		}) -join "`n"
+			}) -join "`n"
 		
 		$contentTocNcxText = @'
 <?xml version="1.0" encoding="utf-8" ?>
@@ -275,8 +299,7 @@ $($pages | Format-String -Format '    <itemref idref="{0}"/>' -Property EbookFil
 		Write-File -Root $stylesPath -Path 'Style.css' -Text $cssContent
 		
 		$textPath = New-Item -Path $oebpsPath.FullName -Name 'Text' -ItemType Directory
-		foreach ($pageItem in $pages)
-		{
+		foreach ($pageItem in $pages) {
 			$pageText = @'
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
@@ -298,12 +321,10 @@ $($pages | Format-String -Format '    <itemref idref="{0}"/>' -Property EbookFil
 		#endregion Files
 		
 		#region Images
-		if ($images)
-		{
+		if ($images) {
 			$imagesPath = New-Item -Path $oebpsPath.FullName -Name 'Images' -ItemType Directory
 			
-			foreach ($image in $images)
-			{
+			foreach ($image in $images) {
 				$targetPath = Join-Path $imagesPath.FullName $image.FileName
 				[System.IO.File]::WriteAllBytes($targetPath, $image.Data)
 			}

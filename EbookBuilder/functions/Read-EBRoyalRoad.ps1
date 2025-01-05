@@ -108,7 +108,12 @@
 		if (-not $Books[1]) {
 			$Books[1] = $Name
 		}
-		$currentBook = '{0} - {1}' -f $bookCount, $Books[$index]
+
+		# Config might not start at start of book
+		$startVolumeIndex = $index
+		if (-not $Books[$index]) { $startVolumeIndex = $Books.Keys | Where-Object { $index -gt $_ } | Sort-Object -Descending | Select-Object -First 1 }
+
+		$currentBook = '{0} - {1}' -f $bookCount, $Books[$startVolumeIndex]
 		$currentBookPath = Join-Path -Path $OutPath -ChildPath $currentBook
 		
 		if (-not (Test-Path -Path $currentBookPath)) {

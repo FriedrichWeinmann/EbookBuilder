@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## ???
+
++ Fix: Command Read-EBRoyalRoad - fails when starting chapter index is not the begin of a volume.
++ Fix: Command Read-EBRoyalRoad - includes incorrect tail data due to website changes
+
 ## 2.4.24 (2022-01-03)
 
 + New: Command: Read-EBEpub - extracts chapters from an epub ebook and converts them to markdown

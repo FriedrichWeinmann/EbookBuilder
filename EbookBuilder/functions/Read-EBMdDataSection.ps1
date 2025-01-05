@@ -37,7 +37,7 @@
 	
 	begin
 	{
-		$result = @{ }
+		$result = [ordered]@{ }
 		$result += $Data
 	}
 	process
