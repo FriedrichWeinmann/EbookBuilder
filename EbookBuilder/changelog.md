@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## ???
+## 2.4.26 (2025-05-11)
 
 + Fix: Command Read-EBRoyalRoad - fails when starting chapter index is not the begin of a volume.
 + Fix: Command Read-EBRoyalRoad - includes incorrect tail data due to website changes
