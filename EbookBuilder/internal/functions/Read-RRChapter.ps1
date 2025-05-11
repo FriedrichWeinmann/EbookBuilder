@@ -61,7 +61,7 @@
 				$Line
 			)
 			process {
-				if ($Line -notlike '*<a class="btn btn-primary*>Next <br class="visible-xs" />Chapter</a>*') { return }
+				if ($Line -notlike '*<a class="btn btn-primary*>Next <br class="visible-xs"/>Chapter</a>*') { return }
 				$Line -replace '^.+href="(.+?)".+$', 'https://www.royalroad.com$1'
 			}
 		}
@@ -180,7 +180,10 @@
 			if ($_ -like '*<div class="chapter-inner chapter-content">*') {
 				$found = $true
 			}
-			if ($_ -like '*<h6 class="bold uppercase text-center">Advertisement</h6>*') {
+			if ($_ -like '*<h6 class="*">Advertisement</h6>*') {
+				$found = $false
+			}
+			if ($_ -like '*<div class="bold uppercase">Advertisement</div>*') {
 				$found = $false
 			}
 			

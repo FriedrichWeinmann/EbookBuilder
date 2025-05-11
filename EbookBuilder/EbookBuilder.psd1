@@ -3,7 +3,7 @@
 	ModuleToProcess = 'EbookBuilder.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '2.4.24'
+	ModuleVersion = '2.4.26'
 	
 	# ID used to uniquely identify this module
 	GUID = '6dd367f3-da8b-48ae-8198-ce2b709cb1a4'
@@ -26,10 +26,10 @@
 	# Modules that must be imported into the global environment prior to importing
 	# this module
 	RequiredModules = @(
-		@{ ModuleName = 'PSFramework'; ModuleVersion = '1.6.214' }
-		@{ ModuleName = 'string'; ModuleVersion = '1.0.0' }
+		@{ ModuleName = 'PSFramework'; ModuleVersion = '1.12.346' }
+		@{ ModuleName = 'string'; ModuleVersion = '1.1.5' }
 		@{ ModuleName = 'StringBuilder'; ModuleVersion = '1.0.0' }
-		@{ ModuleName = 'PSModuleDevelopment'; ModuleVersion = '2.2.10.128' }
+		@{ ModuleName = 'PSModuleDevelopment'; ModuleVersion = '2.2.13.176' }
 	)
 	
 	# Assemblies that must be loaded prior to importing this module
